@@ -21,3 +21,6 @@ email-mcp = "email_mcp:main"
 [project.urls]
 Homepage = "https://github.com/dewkiks/smtp-uvx-mcp"
 Repository = "https://github.com/dewkiks/smtp-uvx-mcp"
+
+[tool.hatch.build.targets.wheel]
+py-modules = ["email_mcp"]
