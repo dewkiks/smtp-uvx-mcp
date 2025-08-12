@@ -23,6 +23,4 @@ Homepage = "https://github.com/dewkiks/smtp-uvx-mcp"
 Repository = "https://github.com/dewkiks/smtp-uvx-mcp"
 
 [tool.hatch.build.targets.wheel]
-packages = [
-  { include = "smtp_uvx_mcp", from = "src" }
-]
+packages = ["src/smtp_uvx_mcp"]
