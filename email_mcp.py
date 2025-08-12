@@ -145,7 +145,7 @@ async def handle_call_tool(name: str, arguments: dict[str, Any]) -> list[types.T
     return [types.TextContent(type="text", text=_json.dumps(result))]
 
 
-async def main() -> None:
+async def _run() -> None:
     """Run the MCP server over stdio."""
     async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
         await server.run(
@@ -162,8 +162,13 @@ async def main() -> None:
         )
 
 
+def main() -> None:
+    """Main entry point for the MCP email server (console script)."""
+    asyncio.run(_run())
+
+
 if __name__ == "__main__":
     try:
-        asyncio.run(main())
+        main()
     except KeyboardInterrupt:
         pass
