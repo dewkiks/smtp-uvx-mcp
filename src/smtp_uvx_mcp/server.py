@@ -160,15 +160,3 @@ async def _run() -> None:
                 ),
             ),
         )
-
-
-def main() -> None:
-    """Main entry point for the MCP email server (console script)."""
-    asyncio.run(_run())
-
-
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        pass
