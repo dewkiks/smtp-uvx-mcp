@@ -98,7 +98,15 @@ class EmailClient:
 MCP server over stdio compatible with StdioServerParameters.
 """
 server = Server("email-mcp-server")
-email_client = EmailClient()
+email_client = None  # Lazy initialization
+
+
+def get_email_client() -> EmailClient:
+    """Get or create the email client instance."""
+    global email_client
+    if email_client is None:
+        email_client = EmailClient()
+    return email_client
 
 
 @server.list_tools()
@@ -140,7 +148,7 @@ async def handle_call_tool(name: str, arguments: dict[str, Any]) -> list[types.T
     if not isinstance(to, list) or not all(isinstance(x, str) for x in to):
         raise ValueError("'to' must be a list of strings")
 
-    result = await email_client.send_email(to=to, subject=subject, text=body)
+    result = await get_email_client().send_email(to=to, subject=subject, text=body)
     import json as _json
     return [types.TextContent(type="text", text=_json.dumps(result))]
 
